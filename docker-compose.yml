@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    image: mariadb:10.2
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_ROOT_PASSWORD: AppleSucks
+    restart: always
+  drupal:
+    depends_on:
+      - db
+    build: .
+    ports:
+      - "8888:80"
+    restart: always
