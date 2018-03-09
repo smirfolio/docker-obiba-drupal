@@ -16,4 +16,8 @@ services:
       - "8888:80"
     restart: always
     extra_hosts:
-        - "dockerhost:$DOCKERHOST"
+        - dockerhost:172.20.0.1
+networks:
+    default:
+        external:
+            name: drupalNet
