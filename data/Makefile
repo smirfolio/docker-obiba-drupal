@@ -8,7 +8,6 @@ MYSQL_PASSWORD=1234
 MYSQL_DB=drupal_obiba
 #Drupal
 www_folder=/var/www/html
-DV=7.56
 DF=drupal-release
 Dadm=administrator
 Dpassword=password

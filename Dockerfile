@@ -4,7 +4,7 @@
 # https://github.com/obiba/docker-mica-drupal
 #
 
-FROM drupal:7.57
+FROM drupal:7.58
 
 MAINTAINER OBiBa <dev@obiba.org>
 
