@@ -3,9 +3,11 @@ services:
   db:
     image: mariadb:10.2
     environment:
-      MYSQL_DATABASE: drupal
-      MYSQL_ROOT_PASSWORD: AppleSucks
+      MYSQL_DATABASE: drupal_obiba
+      MYSQL_ROOT_PASSWORD: 1234
     restart: always
+    ports:
+      - "3366:3306"
   drupal:
     depends_on:
       - db
@@ -13,3 +15,9 @@ services:
     ports:
       - "8888:80"
     restart: always
+    extra_hosts:
+        - dockerhost:172.20.0.1
+networks:
+    default:
+        external:
+            name: drupalNet
