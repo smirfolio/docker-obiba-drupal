@@ -20,7 +20,7 @@ www_user="www-data"
 build-obiba: site-install obiba-dl-dependecies obiba-en-dependecies obiba-js-dependecies obiba-composer-conf obiba-settings obiba-fix-permission
 
 site-install:
-	drush site-install standard --account-name=$(Dadm) --account-pass=$(Dpassword) --db-url=mysql://$(MYSQL_DATABASE_USER):$(MYSQL_PASSWORD)@$(MYSQL_HOST)/$(MYSQL_DB) --site-name="Obiba Mica" -y
+	drush site-install standard --account-name=$(Dadm) --account-pass=$(Dpassword) --db-url=mysql://$(MYSQL_DATABASE_USER):$(MYSQL_PASSWORD)@$(MYSQL_HOST)/$(MYSQL_DB) --site-name="Obiba Mica" install_configure_form.update_status_module='array(FALSE,FALSE)' -y
 
 obiba-dl-dependecies:
 	drush dl -y bootstrap obiba_bootstrap-$(BV) obiba_mica-$(MV) obiba_agate-$(AV)  autologout
