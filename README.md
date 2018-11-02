@@ -7,4 +7,4 @@ Launch obiba Drupal Mica Portal container (see Makefile for more details):
 
 Then connect to:
 
-[https://localhost:8888](https://localhost:8888)
+[http://localhost:8888](http://localhost:8888)
