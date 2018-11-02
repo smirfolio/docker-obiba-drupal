@@ -1,5 +1,14 @@
 version: '3'
 services:
+  obiba-drupal:
+      image: obiba/obiba-drupal:snapshot
+      depends_on:
+        - db
+      ports:
+        - "8888:80"
+      restart: always
+      extra_hosts:
+          - dockerhost:172.20.0.1
   db:
     image: mariadb:10.2
     environment:
@@ -8,15 +17,6 @@ services:
     restart: always
     ports:
       - "3366:3306"
-  drupal:
-    depends_on:
-      - db
-    build: .
-    ports:
-      - "8888:80"
-    restart: always
-    extra_hosts:
-        - dockerhost:172.20.0.1
 networks:
     default:
         external:
