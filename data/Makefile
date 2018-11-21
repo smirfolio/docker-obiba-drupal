@@ -12,12 +12,12 @@ DF=drupal-release
 Dadm=administrator
 Dpassword=password
 #obiba
-MV=7.x-34.0
+MV=7.x-34.2
 AV=7.x-2.5
-BV=7.x-5.2
+BV=7.x-5.3
 www_user="www-data"
 
-build-obiba: site-install obiba-dl-dependecies obiba-en-dependecies obiba-js-dependecies obiba-composer-conf obiba-settings obiba-fix-permission
+build-obiba: site-install obiba-dl-dependecies obiba-en-dependecies obiba-js-dependecies obiba-composer-conf obiba-fix-permission obiba-settings
 
 site-install:
 	drush site-install standard --account-name=$(Dadm) --account-pass=$(Dpassword) --db-url=mysql://$(MYSQL_DATABASE_USER):$(MYSQL_PASSWORD)@$(MYSQL_HOST)/$(MYSQL_DB) --site-name="Obiba Mica" -y
@@ -40,14 +40,12 @@ obiba-composer-conf:
 	composer update && \
 	composer dump-autoload -o && popd
 
+obiba-fix-permission:
+	chown -R $(www_user): *
+
 obiba-settings:
 	drush vset -y --format=string jquery_update_jquery_version 1.10 && \
 	drush vset -y --format=string jquery_update_jquery_admin_version 1.10 && \
 	drush vset -y autologout_redirect_url "<front>" && \
-	drush vset -y autologout_no_dialog TRUE && \
-	drush vset -y mica_url https://dockerhost:8445
-
-obiba-fix-permission:
-	chown -R $(www_user): *
-
+	drush vset -y autologout_no_dialog TRUE
 

@@ -1,14 +1,20 @@
 version: '3'
 services:
   docker-obiba-drupal:
-      image: obiba/docker-obiba-drupal:latest
-      depends_on:
-        - db
-      ports:
-        - "8888:80"
-      restart: always
-      extra_hosts:
-          - dockerhost:172.20.0.1
+    image: obiba/docker-obiba-drupal:latest
+    depends_on:
+      - db
+    ports:
+      - "8888:80"
+    restart: always
+    environment:
+      MICA_PORT: 8445
+      MICA_ADDR: mica-host.serv
+      AGATE_PORT: 8444
+      AGATE_ADDR: agate-host.serv
+    extra_hosts:
+        - mica-host.serv:172.20.0.1
+        - agate-host.serv:172.20.0.1
   db:
     image: mariadb:10.2
     environment:
