@@ -12,9 +12,9 @@ DF=drupal-release
 Dadm=administrator
 Dpassword=password
 #obiba
-MV=7.x-34.2
-AV=7.x-2.5
-BV=7.x-5.3
+MV=7.x-34.7
+AV=7.x-2.6
+BV=7.x-5.5
 www_user="www-data"
 
 build-obiba: site-install obiba-dl-dependecies obiba-en-dependecies obiba-js-dependecies obiba-composer-conf obiba-fix-permission obiba-settings
