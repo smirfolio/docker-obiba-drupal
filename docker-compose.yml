@@ -2,6 +2,7 @@ version: '3'
 services:
   docker-obiba-drupal:
     image: obiba/docker-obiba-drupal:latest
+#    build: .
     depends_on:
       - db
     ports:
