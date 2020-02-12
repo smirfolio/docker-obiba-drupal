@@ -1,30 +1,39 @@
-version: '3'
+version: "3.7"
 services:
-  docker-obiba-drupal:
+  drupal:
     image: obiba/docker-obiba-drupal:latest
 #    build: .
-    depends_on:
-      - db
     ports:
       - "8888:80"
-    restart: always
+    links:
+      - mysql
     environment:
-      MICA_PORT: 8445
-      MICA_ADDR: mica-host.serv
-      AGATE_PORT: 8444
-      AGATE_ADDR: agate-host.serv
-    extra_hosts:
-        - mica-host.serv:172.20.0.1
-        - agate-host.serv:172.20.0.1
-  db:
-    image: mariadb:10.2
-    environment:
-      MYSQL_DATABASE: drupal_obiba
-      MYSQL_ROOT_PASSWORD: 1234
+      - MYSQL_DATABASE=drupal_mica
+      - MYSQL_ROOT_PASSWORD=password
+      - DRUPAL_ADMINISTRATOR_PASSWORD=password
+      - MICA_ANONYMOUS_PASSWORD=password
+      - MYSQL_PORT_3306_TCP_ADDR=172.16.0.6
     restart: always
-    ports:
-      - "3366:3306"
+    networks:
+      nightlynw:
+        ipv4_address: 172.16.0.8
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=drupal_mica
+      - MYSQL_USER=drupal
+      - MYSQL_USER_HOST=172.16.0.1/255.255.255.245
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+      # This allows ip ranges from 172.16.0.1 to 172.16.0.9 to connect to root
+      - MYSQL_ROOT_HOST=172.16.0.1/255.255.255.245
+    restart: always
+    networks:
+      nightlynw:
+        ipv4_address: 172.16.0.6
 networks:
-    default:
-        external:
-            name: drupalNet
+  nightlynw:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.0.0/24"

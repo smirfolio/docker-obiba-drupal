@@ -4,7 +4,7 @@
 # https://github.com/obiba/docker-mica-drupal
 #
 
-FROM drupal:7.67
+FROM drupal:7.69
 
 MAINTAINER OBiBa <dev@obiba.org>
 
@@ -28,8 +28,15 @@ COPY data/Makefile /var/www/html/Makefile
 COPY bin/start.sh /var/www/html/start.sh
 RUN ["chmod", "+x", "/var/www/html/start.sh"]
 
-ENV MYSQL_HOST=db
-ENV MYSQL_PASSWORD=1234
+ENV MYSQL_HOST=172.16.0.6
+ENV MYSQL_DATABASE=drupal_mica
+ENV MYSQL_USER=drupal
+ENV MYSQL_PASSWORD=password
+ENV MYSQL_ROOT_PASSWORD=password
+ENV AGATE_PORT_8444_TCP_ADDR=172.16.0.1
+ENV AGATE_PORT=8444
+ENV MICA_PORT_8445_TCP_ADDR=172.16.0.1
+ENV MICA_PORT=8445
 # http
 EXPOSE 80
 
