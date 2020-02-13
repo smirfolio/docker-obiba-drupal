@@ -49,3 +49,5 @@ obiba-settings:
 	drush vset -y autologout_redirect_url "<front>" && \
 	drush vset -y autologout_no_dialog TRUE
 
+include update-module.mk
+

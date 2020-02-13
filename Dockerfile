@@ -26,6 +26,8 @@ RUN composer global require drush/drush:8.* && \
 COPY data/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY data/20.memory_limit.ini /usr/local/etc/php/conf.d/
 COPY data/Makefile /var/www/html/Makefile
+# They be usuful if we want to update some already installed obiba_mica modules
+COPY data/update-module.mk /var/www/html/update-module.mk
 COPY bin/start.sh /var/www/html/start.sh
 RUN ["chmod", "+x", "/var/www/html/start.sh"]
 
