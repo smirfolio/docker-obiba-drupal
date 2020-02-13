@@ -12,12 +12,13 @@ RUN apt-get update && apt-get install -y curl mysql-client wget
 
 #
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
 	php composer-setup.php && \
 	mv composer.phar /usr/local/bin/composer && \
 	php -r "unlink('composer-setup.php');"
 
 # Install Drush
-RUN composer global require drush/drush:7.* && \
+RUN composer global require drush/drush:8.* && \
   	ln -s /root/.composer/vendor/bin/drush /usr/local/bin/drush && \
   	drush dl composer-8.x-1.x && \
   	drush status
@@ -27,6 +28,13 @@ COPY data/20.memory_limit.ini /usr/local/etc/php/conf.d/
 COPY data/Makefile /var/www/html/Makefile
 COPY bin/start.sh /var/www/html/start.sh
 RUN ["chmod", "+x", "/var/www/html/start.sh"]
+
+
+# Update self contained composer for php-7.3
+COPY data/composer.json /root/.drush/composer
+RUN cd /root/.drush/composer && \
+  	composer update && \
+  	drush composer about
 
 ENV MYSQL_HOST=172.16.0.6
 ENV MYSQL_DATABASE=drupal_mica
