@@ -16,4 +16,5 @@ docker-logs:
 docker-clear:
 	docker-compose stop && \
 	docker-compose down && \
-	docker network prune -f
+	docker network prune -f && \
+	docker rmi -f `docker images -q`
