@@ -12,12 +12,12 @@ DF=drupal-release
 Dadm=administrator
 Dpassword=password
 #obiba
-MV=7.x-36.5
+MV=7.x-41.0
 AV=7.x-15.0
 BV=7.x-7.0
 www_user="www-data"
 
-build-obiba: site-install obiba-dl-dependecies obiba-en-dependecies obiba-js-dependecies obiba-composer-conf obiba-fix-permission obiba-settings
+build-obiba: site-install obiba-dl-dependecies obiba-en-dependecies obiba-js-dependecies obiba-settings  obiba-composer-conf obiba-fix-permission
 
 site-install:
 	drush site-install standard --account-name=$(Dadm) --account-pass=$(Dpassword) --db-url=mysql://$(MYSQL_DATABASE_USER):$(MYSQL_PASSWORD)@$(MYSQL_HOST)/$(MYSQL_DB) --site-name="Obiba Mica" install_configure_form.update_status_module='array(FALSE,FALSE)' -y
@@ -44,8 +44,14 @@ obiba-fix-permission:
 	chown -R $(www_user): *
 
 obiba-settings:
-	drush vset -y --format=string jquery_update_jquery_version 1.10 && \
-	drush vset -y --format=string jquery_update_jquery_admin_version 1.10 && \
+	drush dis -y jquery_update && \
+    rm -rf sites/all/modules/jquery_update && \
+    drush dl -y jquery_update-7.x-3.0-alpha5 && \
+    drush en -y jquery_update && \
+    drush en -y obiba_mica && \
+    drush ev 'variable_set("theme_obiba_bootstrap_settings", array("jquery_update_jquery_version" => 2.2));' && \
+    drush vset -y --format=string jquery_update_jquery_version 2.2 && \
+    drush vset -y jquery_update_jquery_migrate_enable 1 && \
 	drush vset -y autologout_redirect_url "<front>" && \
 	drush vset -y autologout_no_dialog TRUE
 
