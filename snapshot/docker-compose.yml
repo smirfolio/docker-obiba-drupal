@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  drupal:
+    image: obiba/docker-obiba-drupal:snapshot
+#    build: .
+    ports:
+      - "8888:80"
+    links:
+      - mysql
+    environment:
+      - MYSQL_DATABASE=drupal_mica
+      - MYSQL_ROOT_PASSWORD=password
+      - DRUPAL_ADMINISTRATOR_PASSWORD=password
+      - MICA_ANONYMOUS_PASSWORD=password
+      - MYSQL_PORT_3306_TCP_ADDR=172.16.0.6
+    restart: always
+    networks:
+      nightlynw:
+        ipv4_address: 172.16.0.8
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=drupal_mica
+      - MYSQL_USER=drupal
+      - MYSQL_USER_HOST=172.16.0.1/255.255.255.245
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+      # This allows ip ranges from 172.16.0.1 to 172.16.0.9 to connect to root
+      - MYSQL_ROOT_HOST=172.16.0.1/255.255.255.245
+    restart: always
+    networks:
+      nightlynw:
+        ipv4_address: 172.16.0.6
+networks:
+  nightlynw:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.0.0/24"

@@ -1,0 +1,88 @@
+core: 7.x
+api: 2
+projects:
+  drupal:
+    version: '7.71'
+  autologout:
+    version: '4.6'
+  ctools:
+    version: '1.15'
+  collapsiblock:
+    version: '1.1'
+  composer_manager:
+    version: '1.8'
+  countries:
+    version: '2.3'
+  entity:
+    version: '1.9'
+  http_client:
+    version: '2.4'
+  i18n:
+    version: '1.26'
+  jquery_update:
+    version: '2.7'
+  libraries:
+    version: '2.5'
+  markdown:
+    version: '1.5'
+  obiba_agate:
+    type: "module"
+    directory_name: "obiba_agate"
+    download:
+      type: "git"
+      branch: "master"
+      url: "https://github.com/obiba/agate-drupal7.git"
+  obiba_mica:
+    type: "module"
+    directory_name: "obiba_mica"
+    download:
+      type: "git"
+      branch: "master"
+      url: "https://github.com/obiba/mica-drupal7.git"
+  variable:
+    version: '2.5'
+  bootstrap:
+    version: '3.22'
+  obiba_bootstrap:
+    type: theme
+    directory_name: "obiba_bootstrap"
+    download:
+      type: "git"
+      branch: "master"
+      url: "https://github.com/obiba/bootstrap-drupal7.git"
+libraries:
+  obiba-progressbar:
+    directory_name: obiba-progressbar
+    type: library
+    download:
+      type: "file"
+      url: "https://github.com/obiba/mica-drupal-js-libraries/archive/master.zip"
+      subtree: "mica-drupal-js-libraries-master/obiba-progressbar"
+  datatables:
+    directory_name: datatables
+    type: library
+    download:
+      type: "file"
+      url: "https://github.com/obiba/mica-drupal-js-libraries/archive/master.zip"
+      subtree: "mica-drupal-js-libraries-master/datatables"
+  angular-app:
+    directory_name: angular-app
+    type: library
+    download:
+      type: "file"
+      url: "https://github.com/obiba/mica-drupal-js-libraries/archive/master.zip"
+      subtree: "mica-drupal-js-libraries-master/angular-app"
+  obiba-country-codes:
+    directory_name: obiba-country-codes
+    type: library
+    download:
+      type: "file"
+      url: "https://github.com/obiba/mica-drupal-js-libraries/archive/master.zip"
+      subtree: "mica-drupal-js-libraries-master/obiba-country-codes"
+  mica-study-timeline:
+    directory_name: mica-study-timeline
+    type: library
+    download:
+      type: "file"
+      url: "https://github.com/obiba/mica-drupal-js-libraries/archive/master.zip"
+      subtree: "mica-drupal-js-libraries-master/mica-study-timeline"

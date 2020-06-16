@@ -8,7 +8,7 @@ FROM drupal:7.71
 
 MAINTAINER OBiBa <dev@obiba.org>
 
-RUN apt-get update && apt-get install -y curl default-mysql-client wget
+RUN apt-get update && apt-get install -y curl default-mysql-client wget git unzip
 
 #
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
@@ -26,8 +26,8 @@ RUN composer global require drush/drush:8.* && \
 COPY data/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY data/20.memory_limit.ini /usr/local/etc/php/conf.d/
 COPY data/Makefile /var/www/html/Makefile
+COPY data/drupal_snapshot.yml /var/www/html/drupal_snapshot.yml
 # They be usuful if we want to update some already installed obiba_mica modules
-COPY data/update-module.mk /var/www/html/update-module.mk
 COPY bin/start.sh /var/www/html/start.sh
 RUN ["chmod", "+x", "/var/www/html/start.sh"]
 
