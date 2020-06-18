@@ -12,7 +12,7 @@ DF=drupal-release
 Dadm=administrator
 Dpassword=password
 #obiba
-MV=7.x-41.0
+MV=7.x-42.0
 AV=7.x-15.0
 BV=7.x-7.0
 www_user="www-data"

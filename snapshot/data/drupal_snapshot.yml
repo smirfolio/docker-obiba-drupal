@@ -2,13 +2,13 @@ core: 7.x
 api: 2
 projects:
   drupal:
-    version: '7.72'
+    version: '7.73'
   autologout:
     version: '4.6'
   ctools:
     version: '1.15'
   collapsiblock:
-    version: '1.1'
+    version: '2.0'
   composer_manager:
     version: '1.8'
   countries:
@@ -18,7 +18,7 @@ projects:
   http_client:
     version: '2.4'
   i18n:
-    version: '1.26'
+    version: '1.27'
   jquery_update:
     version: '2.7'
   libraries:
